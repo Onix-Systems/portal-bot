@@ -1,31 +1,4 @@
-import { getAllFilms } from '../services/crawler';
-
-const filmsPromise = (() => {
-  let filmsPromise = null;
-  let areFilmsFetched = false;
-  let films = [];
-
-  const getFilms = () => (
-    filmsPromise = areFilmsFetched ?
-      Promise.resolve(films) :
-      (filmsPromise || getAllFilms().then(films => {
-        console.log('completed');
-        areFilmsFetched = true;
-        return films;
-      }))
-  );
-
-  getFilms();
-  setInterval(() => {
-    if (areFilmsFetched) {
-      filmsPromise = null;
-      areFilmsFetched = false;
-      getFilms();
-    }
-  }, 9e5); // 15 minutes
-
-  return filmsPromise;
-})();
+import filmsPromise from '../services/crawler';
 
 const getKeyboard = (films, currentFilmId) => [
   [{ text: '[ Список фильмов ]', callback_data: 'menu' }],
@@ -64,8 +37,6 @@ export default bot => {
         !film ?
           'Фильм не найден' :
           [
-            `*${film.result.info.title}*`,
-            '',
             `*Даты показа*: ${film.date_anonce.join('')} - ${film.date_close.join('')}`,
             `*Формат*: ${film.result.format}`,
             `*Жанры*: ${film.result.zhanr.join(', ')}`,
@@ -74,7 +45,7 @@ export default bot => {
             `*Длительность*: ${film.result.dlitelnost_min}`,
             `*Режиссер*: ${film.result.rezhisser}`,
             `*Актеры*: ${film.result.aktery}`,
-            `[·](http://portalcinema.com.ua/uploads/products/main/${film.main_photo})`
+            `[|](http://portalcinema.com.ua/uploads/products/main/${film.main_photo})`
           ].join("\n");
 
       bot.editMessageText(response.text, {

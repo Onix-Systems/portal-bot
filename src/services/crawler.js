@@ -1,11 +1,24 @@
 import requestPromise from 'request-promise';
 
-const makeRequest = (method = 'get', url = '', options = {}) => (
-  requestPromise[method](`http://portalcinema.com.ua/${url}`, {
+const portalUrl = 'http://portalcinema.com.ua/';
+
+const makeRequest = (method = 'get', path = '', options = {}) => (
+  requestPromise[method](`${portalUrl}${path}`, {
     timeout: 5000,
     ...options
   })
 );
+
+const fetchFilms = () => {
+  console.log('fetch');
+  return makeRequest()
+    .then(getFilmsId)
+    .then(getFilmsInfo)
+    .catch(error => {
+      console.error(error);
+      return fetchFilms();
+    });
+};
 
 const getFilmsId = html => {
   const re = /load_film_info\((\d+)\)/g;
@@ -38,13 +51,27 @@ const getFilmsInfo = filmsId => (
   )
 );
 
-export const getAllFilms = () => {
-  console.log('fetch'); // TODO: remove
-  return makeRequest()
-    .then(getFilmsId)
-    .then(getFilmsInfo)
-    .catch(error => {
-      console.error(error);
-      return getAllFilms();
+let filmsPromise = null;
+let fetched = false;
+
+const getFilms = () => (
+  filmsPromise = (
+    filmsPromise
+    || fetchFilms().then(films => {
+      console.log('completed');
+      fetched = true;
+      return films;
     })
-};
+  )
+);
+
+getFilms();
+setInterval(() => {
+  if (fetched) {
+    filmsPromise = null;
+    fetched = false;
+    getFilms();
+  }
+}, 9e5); // 15 minutes
+
+export default filmsPromise;
