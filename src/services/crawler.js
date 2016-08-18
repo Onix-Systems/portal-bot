@@ -22,17 +22,17 @@ const fetchFilms = () => {
 
 const getFilmsId = html => {
   const re = /load_film_info\((\d+)\)/g;
-  const filmIds = new Set();
+  const filmsId = new Set();
   let matches = [];
 
   do {
     matches = re.exec(html);
     if (matches && matches.length > 1) {
-      filmIds.add(matches[1]);
+      filmsId.add(matches[1]);
     }
   } while (matches);
 
-  return filmIds;
+  return filmsId;
 };
 
 const getFilmsInfo = filmsId => (
