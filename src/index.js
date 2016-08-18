@@ -7,11 +7,11 @@ import PortalBot from './bot';
 env('./.env', { raise: false });
 const __PROD__ = process.env.NODE_ENV === 'production';
 
-const telegramBot = new TelegramBot(
+const bot = new TelegramBot(
   process.env.TELEGRAM_BOT_TOKEN,
   { polling: !__PROD__ }
 );
-telegramBot.setWebHook(
+bot.setWebHook(
   __PROD__ ?
     `https://portal-cinema-bot.herokuapp.com/${process.env.TELEGRAM_BOT_TOKEN}` :
     ''
@@ -29,4 +29,4 @@ if (__PROD__) {
   app.listen(process.env.PORT || 8080);
 }
 
-PortalBot(telegramBot);
+PortalBot(bot);
