@@ -9,6 +9,7 @@ const filmsPromise = (() => {
     filmsPromise = areFilmsFetched ?
       Promise.resolve(films) :
       (filmsPromise || getAllFilms().then(films => {
+        console.log('completed');
         areFilmsFetched = true;
         return films;
       }))
@@ -26,20 +27,25 @@ const filmsPromise = (() => {
   return filmsPromise;
 })();
 
-const getKeyboard = films => [
+const getKeyboard = (films, currentFilmId) => [
   [{ text: 'Меню', callback_data: 'menu' }],
-  ...[...films].map(([id, film]) => [{
-    text: film.result.info.title,
-    callback_data: id
-  }])
+  ...[...films].reduce((list, [id, film]) => {
+    if (id !== currentFilmId) {
+      list.push([{
+        text: film.result.info.title,
+        callback_data: id
+      }]);
+    }
+    return list;
+  }, [])
 ];
 
-const getDefaultResponse = films => ({
+const getDefaultResponse = (films, currentFilmId) => ({
   text: 'Список фильмов:',
   options: {
     parse_mode: 'markdown',
     reply_markup: {
-      inline_keyboard: getKeyboard(films)
+      inline_keyboard: getKeyboard(films, currentFilmId)
     }
   }
 });
@@ -52,7 +58,7 @@ export default bot => {
 
       const isMenu = query.data === 'menu';
       const film = isMenu ? null : films.get(query.data);
-      const response = getDefaultResponse(films);
+      const response = getDefaultResponse(films, film && film.result.id);
       response.text = isMenu ?
         response.text :
         !film ?
@@ -71,13 +77,11 @@ export default bot => {
             `[·](http://portalcinema.com.ua/uploads/products/main/${film.main_photo})`
           ].join("\n");
 
-      if (response.text !== query.message.text) {
-        bot.editMessageText(response.text, {
-          ...response.options,
-          chat_id: query.message.chat.id,
-          message_id: query.message.message_id
-        });
-      }
+      bot.editMessageText(response.text, {
+        ...response.options,
+        chat_id: query.message.chat.id,
+        message_id: query.message.message_id
+      });
 
     });
 
