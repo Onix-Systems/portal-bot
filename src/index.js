@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import TelegramBot from 'node-telegram-bot-api';
 import PortalBot from './bot';
 
-env('./.env');
+env('./.env', { raise: false });
 const __PROD__ = process.env.NODE_ENV === 'production';
 
 const telegramBot = new TelegramBot(
