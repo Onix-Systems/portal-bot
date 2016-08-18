@@ -52,26 +52,22 @@ const getFilmsInfo = filmsId => (
 );
 
 let filmsPromise = null;
-let fetched = false;
+
+const reFetch = () => {
+  filmsPromise = null;
+  getFilms();
+};
 
 const getFilms = () => (
   filmsPromise = (
     filmsPromise
     || fetchFilms().then(films => {
       console.log('completed');
-      fetched = true;
+      setTimeout(reFetch, 9e5); // 15 minutes
       return films;
     })
   )
 );
-
 getFilms();
-setInterval(() => {
-  if (fetched) {
-    filmsPromise = null;
-    fetched = false;
-    getFilms();
-  }
-}, 9e5); // 15 minutes
 
 export default filmsPromise;
