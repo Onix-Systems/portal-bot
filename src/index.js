@@ -13,7 +13,7 @@ const telegramBot = new TelegramBot(
 );
 telegramBot.setWebHook(
   __PROD__ ?
-    `some production url` :
+    `https://portal-cinema-bot.herokuapp.com/${process.env.TELEGRAM_BOT_TOKEN}` :
     ''
 );
 
