@@ -25,7 +25,7 @@ if (__PROD__) {
     bot.processUpdate(req.body);
     res.sendStatus(200);
   });
-  app.listen(80);
+  app.listen(8080);
 }
 
 PortalBot(telegramBot);
