@@ -26,7 +26,7 @@ if (__PROD__) {
     bot.processUpdate(req.body);
     res.sendStatus(200);
   });
-  app.listen(8080);
+  app.listen(process.env.PORT || 8080);
 }
 
 PortalBot(telegramBot);
