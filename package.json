@@ -2,8 +2,8 @@
   "name": "portalBot",
   "version": "0.0.1",
   "scripts": {
-    "prestart": "rm -rf lib && mkdir lib && babel src -d lib",
-    "start": "nodemon lib/index.js"
+    "prestart": "rm -rf lib && mkdir lib && ./node_modules/.bin/babel src -d lib",
+    "start": "./node_modules/.bin/nodemon lib/index.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
