@@ -35,15 +35,22 @@ const getFilmsId = html => {
   return filmsId;
 };
 
+const fetchFilm = film => (
+  makeRequest(
+    'post',
+    'products/index/getInfo',
+    { form: { film } }
+  ).then(
+    JSON.parse
+  ).catch(error => {
+    console.error(error);
+    return fetchFilm(film);
+  })
+);
+
 const getFilmsInfo = filmsId => (
   Promise.all(
-    [...filmsId].map(film =>
-      makeRequest(
-        'post',
-        'products/index/getInfo',
-        { form: { film } }
-      ).then(JSON.parse)
-    )
+    [...filmsId].map(fetchFilm)
   ).then(films =>
     new Map(films.map(film => [
       film.result.id, film
