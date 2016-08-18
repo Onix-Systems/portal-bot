@@ -17,4 +17,14 @@ telegramBot.setWebHook(
     ''
 );
 
+if (__PROD__) {
+  const app = express();
+  app.use(bodyParser.json());
+  app.get(`/${process.env.TELEGRAM_BOT_TOKEN}`, (req, res) => {
+    bot.processUpdate(req.body);
+    res.sendStatus(200);
+  });
+  app.listen(80);
+}
+
 PortalBot(telegramBot);
