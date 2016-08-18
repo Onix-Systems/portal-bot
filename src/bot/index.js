@@ -28,7 +28,7 @@ const filmsPromise = (() => {
 })();
 
 const getKeyboard = (films, currentFilmId) => [
-  [{ text: 'Меню', callback_data: 'menu' }],
+  [{ text: '[ Список фильмов ]', callback_data: 'menu' }],
   ...[...films].reduce((list, [id, film]) => {
     if (id !== currentFilmId) {
       list.push([{
