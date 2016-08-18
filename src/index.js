@@ -20,6 +20,7 @@ telegramBot.setWebHook(
 if (__PROD__) {
   const app = express();
   app.use(bodyParser.json());
+  app.get('/', (_, res) => res.redirect('https://telegram.me/testmemroynodebot'));
   app.get(`/${process.env.TELEGRAM_BOT_TOKEN}`, (req, res) => {
     bot.processUpdate(req.body);
     res.sendStatus(200);
