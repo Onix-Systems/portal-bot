@@ -10,7 +10,7 @@ const makeRequest = (method = 'get', path = '', options = {}) => (
 );
 
 const fetchFilms = () => {
-  console.log('fetch');
+  console.log('fetch', Date.now());
   return makeRequest()
     .then(getFilmsId)
     .then(getFilmsInfo)

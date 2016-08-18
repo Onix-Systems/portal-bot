@@ -1,76 +1,112 @@
 import filmsPromise from '../services/crawler';
+import MESSAGES from './messages';
+import OPTIONS from './options';
 
-const getKeyboard = (films, currentFilmId) => [
-  [{ text: '[ Список фильмов ]', callback_data: 'menu' }],
-  ...[...films].reduce((list, [id, film]) => {
-    if (id !== currentFilmId) {
-      list.push([{
+const getGreetKeyboard = films => ({
+  reply_markup: {
+    inline_keyboard: [
+      // TODO: refactor
+      ...[...films].map(([id, film]) => [{
         text: film.result.info.title,
         callback_data: id
-      }]);
-    }
-    return list;
-  }, [])
-];
-
-const getDefaultResponse = (films, currentFilmId) => ({
-  text: 'Список фильмов:',
-  options: {
-    parse_mode: 'markdown',
-    reply_markup: {
-      inline_keyboard: getKeyboard(films, currentFilmId)
-    }
+      }])
+    ]
   }
 });
 
-export default bot => {
+// TODO: move to helpers?
+// TODO: refactor
+const getNeighbour = (map, id, left = true) => {
+  const index = [...map].findIndex(([_id]) => _id === id);
+  const size = map.size;
+  return [...map][
+    left ?
+      index > 0 ? index - 1 : size - 1:
+      index < size - 1 ? index + 1 : 0
+    ][1].result.id;
+};
 
-  bot.on('callback_query', query => {
+const getControlsKeyboard = (films, id) => ({
+  reply_markup: {
+    inline_keyboard: [
+      // TODO: complete
+      [
+        { text: 'Сеансы', callback_data: `seances_${id}` },
+        { text: 'Трейлер', callback_data: `trailer_${id}` }
+      ],
+      [
+        { text: '<', callback_data: getNeighbour(films, id) },
+        { text: 'Фильмы', callback_data: 'menu' },
+        { text: '>', callback_data: getNeighbour(films, id, false) },
+      ],
+    ]
+  }
+});
 
-    filmsPromise.then(films => {
+const getGreetOptions = films => ({
+  ...getGreetKeyboard(films),
+  ...OPTIONS.GREET
+});
 
-      const isMenu = query.data === 'menu';
-      const film = isMenu ? null : films.get(query.data);
-      const response = getDefaultResponse(films, film && film.result.id);
-      response.text = isMenu ?
-        response.text :
-        !film ?
-          'Фильм не найден' :
-          [
-            `*Даты показа*: ${film.date_anonce.join('')} - ${film.date_close.join('')}`,
-            `*Формат*: ${film.result.format}`,
-            `*Жанры*: ${film.result.zhanr.join(', ')}`,
-            `*Год*: ${film.result.god}`,
-            `*Страна*: ${film.result.strana}`,
-            `*Длительность*: ${film.result.dlitelnost_min}`,
-            `*Режиссер*: ${film.result.rezhisser}`,
-            `*Актеры*: ${film.result.aktery}`,
-            `[|](http://portalcinema.com.ua/uploads/products/main/${film.main_photo})`
-          ].join("\n");
+const getGreetMessage = films => [
+  MESSAGES.GREET,
+  getGreetOptions(films)
+];
 
-      bot.editMessageText(response.text, {
-        ...response.options,
+const getFilmOptions = (films, id) => ({
+  ...getControlsKeyboard(films, id),
+  ...OPTIONS.FILM
+});
+
+const getFilmMessage = (films, id) => [
+  MESSAGES.FILM(films.get(id)),
+  getFilmOptions(films, id)
+];
+
+
+const messageResponse = bot => message => (
+  filmsPromise.then(films => {
+      bot.sendMessage(
+        message.chat.id,
+        ...getGreetMessage(films)
+      );
+    }
+  )
+);
+
+const callbackQueryResponse = bot => query => (
+  filmsPromise
+    .then(films => {
+      switch (true) {
+        // TODO: complete
+        case query.data.startsWith('seances_'):
+          return ['Seances', getGreetKeyboard(films)];
+
+        // TODO: complete
+        case query.data.startsWith('trailer_'):
+          return ['Trailer', getGreetKeyboard(films)];
+
+        case !isNaN(+query.data):
+          return getFilmMessage(films, query.data);
+
+        case query.data === 'menu':
+          return getGreetMessage(films);
+
+        default:
+          return [MESSAGES.ERROR, getGreetOptions(films)]
+      }
+    })
+    .then(([text, options]) =>
+      bot.editMessageText(text, {
+        ...options,
         chat_id: query.message.chat.id,
         message_id: query.message.message_id
-      }).catch(_ => _);
+      }).catch(error => console.error(error)) // ¯\_(ツ)_/¯ ignore "message is not modified" error
+    )
+);
 
-    });
-
-  });
-
-  bot.on('message', message => {
-
-    filmsPromise.then(films => {
-        const response = getDefaultResponse(films);
-        bot.sendMessage(
-          message.chat.id,
-          response.text,
-          response.options
-        );
-      }
-    );
-
-  });
-
+export default bot => {
   console.log('Bot started!');
+  bot.on('callback_query', callbackQueryResponse(bot));
+  bot.on('message', messageResponse(bot));
 };
