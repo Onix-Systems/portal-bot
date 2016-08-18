@@ -81,7 +81,7 @@ export default bot => {
         ...response.options,
         chat_id: query.message.chat.id,
         message_id: query.message.message_id
-      });
+      }).catch(_ => _);
 
     });
 
