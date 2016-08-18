@@ -18,6 +18,7 @@ telegramBot.setWebHook(
 );
 
 if (__PROD__) {
+  console.log('START EXPRESS');
   const app = express();
   app.use(bodyParser.json());
   app.get('/', (_, res) => res.redirect('https://telegram.me/testmemroynodebot'));
