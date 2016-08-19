@@ -1,10 +1,10 @@
 import { PARSE_MODE } from '../constants';
-import inline_keyboard from '../keyboards/startKeyboard';
+import filmsKeyboard from '../keyboards/filmsKeyboard';
 
-export default {
+export default (...args) => ({
   parse_mode: PARSE_MODE.MARKDOWN,
   disable_web_page_preview: true,
   reply_markup: {
-    inline_keyboard
+    inline_keyboard: filmsKeyboard(...args)
   }
-};
+});

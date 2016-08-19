@@ -1,4 +1,4 @@
-import { DAYS, BUTTONS_PREFIX } from '../constants/index';
+import { DAYS, BUTTONS } from '../constants';
 
 // TODO: refactor http://goo.gl/WRAomg
 const getSchedule = schedule => Object.keys(schedule)
@@ -23,7 +23,7 @@ const getSchedule = schedule => Object.keys(schedule)
 
 export default (film, prefix) => {
   switch (prefix) {
-    case BUTTONS_PREFIX.TRAILER:
+    case BUTTONS.TRAILER:
       const url = film.result.trejlery.match(/src="(.*?)"/)[1];
       return [
         `*${film.result.info.title}*`,
@@ -31,7 +31,7 @@ export default (film, prefix) => {
         `[${url}](${url})`
       ].join("\n");
 
-    case BUTTONS_PREFIX.SEANCES:
+    case BUTTONS.SEANCES:
       return [
         `*${film.result.info.title}*`,
         '',

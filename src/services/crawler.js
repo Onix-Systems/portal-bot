@@ -32,7 +32,7 @@ const getFilmsId = html => {
     }
   } while (matches);
 
-  return filmsId;
+  return [...filmsId];
 };
 
 const fetchFilm = film => (
@@ -50,11 +50,7 @@ const fetchFilm = film => (
 
 const getFilmsInfo = filmsId => (
   Promise.all(
-    [...filmsId].map(fetchFilm)
-  ).then(films =>
-    new Map(films.map(film => [
-      film.result.id, film
-    ]))
+    filmsId.map(fetchFilm)
   )
 );
 

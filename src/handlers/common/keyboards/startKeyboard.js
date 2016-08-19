@@ -1,14 +1,8 @@
-export default films => [
-  // TODO: refactor
-  ...[...films].map(([id, film]) => ({
-    text: film.result.info.title,
-    callback_data: id
-  })).reduce((result, film, index) => {
-    if (index % 2) {
-      result[result.length - 1].push(film);
-    } else {
-      result.push([film]);
-    }
-    return result;
-  }, [])
+import { BUTTONS } from '../constants';
+
+export default [
+  [
+    { text: 'Фильмы', callback_data: BUTTONS.FILMS },
+    { text: 'Анонсы', callback_data: BUTTONS.PREVIEWS }
+  ]
 ];

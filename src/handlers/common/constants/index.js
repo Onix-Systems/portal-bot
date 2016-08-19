@@ -3,10 +3,12 @@ export const PARSE_MODE = {
   HTML: 'HTML'
 };
 
-export const BUTTONS_PREFIX = {
+export const BUTTONS = {
   SEANCES: 'SEANCES',
   TRAILER: 'TRAILER',
-  MENU: 'MENU'
+  MENU: 'MENU',
+  FILMS: 'FILMS',
+  PREVIEWS: 'PREVIEWS'
 };
 
 export const DAYS = [

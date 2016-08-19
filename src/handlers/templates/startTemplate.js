@@ -5,5 +5,5 @@ import text from '../common/messages/startMessage';
 export default () => filmsPromise
   .then(films => ({
     text,
-    options: options(films)
+    options
   }));

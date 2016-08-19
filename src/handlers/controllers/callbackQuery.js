@@ -1,7 +1,8 @@
 import filmTemplate from '../templates/filmTemplate';
 import startTemplate from '../templates/startTemplate';
+import filmsTemplate from '../templates/filmsTemplate';
 import errorTemplate from '../templates/errorTemplate';
-import { BUTTONS_PREFIX } from '../common/constants/index';
+import { BUTTONS } from '../common/constants';
 
 const resolve = data => {
   console.log(data);
@@ -11,12 +12,15 @@ const resolve = data => {
   const filmId = request && request[2];
 
   switch (true) {
-    case prefix === BUTTONS_PREFIX.TRAILER:
-    case prefix === BUTTONS_PREFIX.SEANCES:
+    case prefix === BUTTONS.TRAILER:
+    case prefix === BUTTONS.SEANCES:
     case prefix === '':
       return filmTemplate(filmId, prefix);
 
-    case data === BUTTONS_PREFIX.MENU:
+    case data === BUTTONS.FILMS:
+      return filmsTemplate();
+
+    case data === BUTTONS.MENU:
       return startTemplate();
 
     default:
