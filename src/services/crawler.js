@@ -74,3 +74,7 @@ const getFilms = () => (
 getFilms();
 
 export default filmsPromise;
+
+export const getPoster = imageId => (
+  `${portalUrl}uploads/products/main/${imageId}`
+);

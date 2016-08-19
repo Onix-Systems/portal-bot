@@ -15,6 +15,7 @@ const resolve = data => {
   switch (true) {
     case prefix === BUTTONS.TRAILER:
     case prefix === BUTTONS.SEANCES:
+    case prefix === BUTTONS.POSTER:
     case prefix === '':
       return filmTemplate(filmId, prefix);
 

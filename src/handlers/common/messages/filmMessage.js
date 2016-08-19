@@ -1,3 +1,4 @@
+import { getPoster } from '../../../services/crawler';
 import { DAYS, BUTTONS } from '../constants';
 
 // TODO: refactor http://goo.gl/WRAomg
@@ -36,6 +37,13 @@ export default (film, prefix) => {
         `*${film.result.info.title}*`,
         '',
         getSchedule(film.schedule)
+      ].join("\n");
+
+    case BUTTONS.POSTER:
+      return [
+        `*${film.result.info.title}*`,
+        '',
+        `[|](${getPoster(film.main_photo)})`
       ].join("\n");
 
     default:

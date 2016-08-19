@@ -8,7 +8,8 @@ export const BUTTONS = {
   TRAILER: 'TRAILER',
   MENU: 'MENU',
   FILMS: 'FILMS',
-  PREVIEWS: 'PREVIEWS'
+  PREVIEWS: 'PREVIEWS',
+  POSTER: 'POSTER'
 };
 
 export const DAYS = [

@@ -7,7 +7,10 @@ export default (film, prev, next, prefix = '') => [
     film.seance.length && prefix !== BUTTONS.SEANCES &&
     { text: 'Сеансы', callback_data: BUTTONS.SEANCES + film.result.id },
     prefix !== BUTTONS.TRAILER &&
-    { text: 'Трейлер', callback_data: BUTTONS.TRAILER + film.result.id }
+    { text: 'Трейлер', callback_data: BUTTONS.TRAILER + film.result.id },
+    prefix !== BUTTONS.POSTER &&
+    { text: 'Постер', callback_data: BUTTONS.POSTER + film.result.id }
+
   ].filter(Boolean),
   [
     { text: '<', callback_data: prefix + prev },
