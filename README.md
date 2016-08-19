@@ -4,7 +4,5 @@
 - ~~crawler: catch every film request~~
 - ~~bot: make prev/next for seances/trailers~~
 - ~~bot: add announcements~~
-- bot: nearest seances
+- ~~bot: nearest seances~~
 - ~~bot: group films (2 in a row?)~~
-- bot: make "today" button
-- bot: add poster?

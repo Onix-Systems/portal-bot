@@ -5,10 +5,11 @@ import { BUTTONS } from '../common/constants';
 
 export default () => filmsPromise
   .then(films => {
+    films = films.filter(film => !film.seance.length);
     return {
-      text,
+      text: text(films),
       options: options(
-        films.filter(film => !film.seance.length),
+        films,
         { text: 'Фильмы', callback_data: BUTTONS.FILMS }
       )
     };
