@@ -7,7 +7,7 @@ export default films => [
         '-',
         film.seance
           .map(seance =>
-            seance === (film.time && film.time.join('')) ?
+            seance === (Array.isArray(film.time) && film.time.join('')) ?
               `*${seance}*` :
               seance
           ).join(', ')
