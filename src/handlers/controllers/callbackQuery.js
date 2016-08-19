@@ -16,7 +16,7 @@ const resolve = data => {
     case prefix === '':
       return filmTemplate(filmId, prefix);
 
-    case data === 'menu':
+    case data === BUTTONS_PREFIX.MENU:
       return startTemplate();
 
     default:

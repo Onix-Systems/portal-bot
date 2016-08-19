@@ -25,7 +25,11 @@ export default (film, prefix) => {
   switch (prefix) {
     case BUTTONS_PREFIX.TRAILER:
       const url = film.result.trejlery.match(/src="(.*?)"/)[1];
-      return `[${url}](${url})`;
+      return [
+        `*${film.result.info.title}*`,
+        '',
+        `[${url}](${url})`
+      ].join("\n");
 
     case BUTTONS_PREFIX.SEANCES:
       return [
