@@ -23,7 +23,7 @@ const getNeighbour = (films, film, left = true) => {
 
 export default (filmId, prefix) => filmsPromise
   .then(films => {
-    const film = films.find(film => film.result.info.id === filmId);
+    const film = films.find(film => film.result.info.id === filmId) || films.slice(0, 1);
     return {
       text: text(film, prefix),
       options: options(
