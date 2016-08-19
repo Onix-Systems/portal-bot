@@ -1,5 +1,5 @@
 import { PARSE_MODE } from '../constants';
-import startKeyboard from '../keyboards/start';
+import startKeyboard from '../keyboards/startKeyboard';
 
 export default (...args) => ({
   parse_mode: PARSE_MODE.MARKDOWN,

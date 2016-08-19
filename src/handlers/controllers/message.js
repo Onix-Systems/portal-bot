@@ -1,4 +1,4 @@
-import startTemplate from '../templates/start'
+import startTemplate from '../templates/startTemplate';
 
 const resolve = text => {
   switch (true) {

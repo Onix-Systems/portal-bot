@@ -1,6 +1,6 @@
-import startTemplate from '../templates/start';
-import filmTemplate from '../templates/film';
-import errorTemplate from '../templates/error';
+import startTemplate from '../templates/startTemplate';
+import filmTemplate from '../templates/filmTemplate';
+import errorTemplate from '../templates/errorTemplate';
 
 const resolve = data => {
   switch (true) {
