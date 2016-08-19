@@ -1,7 +1,6 @@
 export default films => [
   '*Сегодня в кино*',
   ...films
-    .filter(film => film.time)
     .map(
       film => {
         const time = film.time && film.time.join('');
