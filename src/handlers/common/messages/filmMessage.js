@@ -40,10 +40,11 @@ export default (film, prefix) => {
       ].join("\n");
 
     case BUTTONS.POSTER:
+      const poster = getPoster(film.main_photo);
       return [
         `*${film.result.info.title}*`,
         '',
-        `[|](${getPoster(film.main_photo)})`
+        `[${poster}](${poster})`
       ].join("\n");
 
     default:
