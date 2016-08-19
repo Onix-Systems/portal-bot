@@ -2,10 +2,11 @@ import env from 'node-env-file';
 import express from 'express';
 import bodyParser from 'body-parser';
 import TelegramBot from 'node-telegram-bot-api';
-import PortalBot from './bot';
+import setHandlers from './handlers';
 
 env('./.env', { raise: false });
 const __PROD__ = process.env.NODE_ENV === 'production';
+const __TOKEN__ = process.env.TELEGRAM_BOT_TOKEN;
 
 const bot = new TelegramBot(
   process.env.TELEGRAM_BOT_TOKEN,
@@ -13,20 +14,23 @@ const bot = new TelegramBot(
 );
 bot.setWebHook(
   __PROD__ ?
-    `https://portal-cinema-bot.herokuapp.com/${process.env.TELEGRAM_BOT_TOKEN}` :
+    `https://portal-cinema-bot.herokuapp.com/${__TOKEN__}` :
     ''
 );
 
-if (__PROD__) {
-  console.log('START EXPRESS');
-  const app = express();
-  app.use(bodyParser.json());
-  app.get('/', (_, res) => res.redirect('https://telegram.me/testmemroynodebot'));
-  app.post(`/${process.env.TELEGRAM_BOT_TOKEN}`, (req, res) => {
-    bot.processUpdate(req.body);
-    res.sendStatus(200);
-  });
-  app.listen(process.env.PORT || 8080);
-}
+const app = express();
 
-PortalBot(bot);
+app.use(bodyParser.json());
+app.get('/', (_, res) =>
+  res.redirect('https://telegram.me/testmemroynodebot')
+);
+app.post(`/${__TOKEN__}`, (req, res) => {
+  bot.processUpdate(req.body);
+  res.sendStatus(200);
+});
+
+__PROD__ && app.listen(process.env.PORT || 8080, () =>
+  console.log('express started')
+);
+
+setHandlers(bot);
