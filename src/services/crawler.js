@@ -21,7 +21,7 @@ const fetchFilms = () => {
 };
 
 const getFilmsId = html => {
-  const re = /load_film_info\((\d+)\)/g;
+  const re = /load_film_info\((\d+)(?:,\s'(anonce)')?\)/g;
   const filmsId = new Set();
   let matches = [];
 

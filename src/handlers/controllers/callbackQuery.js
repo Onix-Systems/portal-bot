@@ -1,6 +1,7 @@
 import filmTemplate from '../templates/filmTemplate';
 import startTemplate from '../templates/startTemplate';
 import filmsTemplate from '../templates/filmsTemplate';
+import previewTemplate from '../templates/previewTemplate';
 import errorTemplate from '../templates/errorTemplate';
 import { BUTTONS } from '../common/constants';
 
@@ -16,6 +17,9 @@ const resolve = data => {
     case prefix === BUTTONS.SEANCES:
     case prefix === '':
       return filmTemplate(filmId, prefix);
+
+    case data === BUTTONS.PREVIEWS:
+      return previewTemplate();
 
     case data === BUTTONS.FILMS:
       return filmsTemplate();
