@@ -1,5 +1,6 @@
 import startTemplate from '../templates/startTemplate'
 import helpTemplate from '../templates/helpTemplate';
+import errorTemplate from '../templates/errorTemplate';
 
 const resolve = text => {
   switch (true) {
@@ -24,4 +25,5 @@ const sendMessage = (bot, message) => ({
 
 export default bot => message =>
   resolve(message.text)
+    .catch(() => errorTemplate)
     .then(sendMessage(bot, message));

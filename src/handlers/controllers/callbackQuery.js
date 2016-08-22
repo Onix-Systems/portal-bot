@@ -27,9 +27,6 @@ const resolve = data => {
 
     case data === BUTTONS.MENU:
       return startTemplate;
-
-    default:
-      return errorTemplate;
   }
 };
 
@@ -46,4 +43,5 @@ const editMessageText = (bot, query) => ({
 
 export default bot => query =>
   resolve(query.data)
+    .catch(() => errorTemplate)
     .then(editMessageText(bot, query));
