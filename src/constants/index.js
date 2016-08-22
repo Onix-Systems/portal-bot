@@ -9,7 +9,8 @@ export const BUTTONS = {
   MENU: 'MENU',
   FILMS: 'FILMS',
   PREVIEWS: 'PREVIEWS',
-  POSTER: 'POSTER'
+  POSTER: 'POSTER',
+  FILM: 'FILM'
 };
 
 export const PORTAL_URL = 'http://portalcinema.com.ua/';

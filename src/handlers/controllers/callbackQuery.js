@@ -16,7 +16,7 @@ const resolve = data => {
     case prefix === BUTTONS.TRAILER:
     case prefix === BUTTONS.SEANCES:
     case prefix === BUTTONS.POSTER:
-    case prefix === '':
+    case prefix === BUTTONS.FILM:
       return filmTemplate(filmId, prefix);
 
     case data === BUTTONS.PREVIEWS:
@@ -27,6 +27,9 @@ const resolve = data => {
 
     case data === BUTTONS.MENU:
       return startTemplate;
+
+    default:
+      return Promise.reject(new Error('Unknown action'));
   }
 };
 

@@ -10,8 +10,8 @@ import i18n from '../i18n';
 
 export default (film, prev, next, prefix = '') => [
   [
-    prefix !== '' &&
-    { text: i18n(INFORMATION), callback_data: film.result.id },
+    prefix !== BUTTONS.FILM &&
+    { text: i18n(INFORMATION), callback_data: BUTTONS.FILM + film.result.id },
     film.seance.length && prefix !== BUTTONS.SEANCES &&
     { text: i18n(SEANCES), callback_data: BUTTONS.SEANCES + film.result.id },
     prefix !== BUTTONS.TRAILER &&

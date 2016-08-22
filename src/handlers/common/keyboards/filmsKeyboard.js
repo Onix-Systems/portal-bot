@@ -6,7 +6,7 @@ export default (films, additionalButton) => [
   ...films.map(
     film => ({
       text: film.result.info.title,
-      callback_data: film.result.id
+      callback_data: BUTTONS.FILM + film.result.id
     })
   ),
   { text: i18n(MENU), callback_data: BUTTONS.MENU }
