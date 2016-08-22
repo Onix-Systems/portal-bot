@@ -61,5 +61,12 @@ export default {
     PORTAL_PHONE2,
     '',
     `Розроблено в [${COMMON[KEYS.COMPANY_NAME]}](${ONIX_URL})`
-  ].join("\n")
+  ].join("\n"),
+  [KEYS.HELP_MESSAGE]: [
+    'Якщо ви знайшли помилку, напишіть мені будь ласка.',
+    '',
+    '@kuguarpwnz',
+    '',
+    'kgrpwnz@gmail.com'
+  ].join("\n"),
 };

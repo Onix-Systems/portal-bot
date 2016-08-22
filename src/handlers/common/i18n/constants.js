@@ -34,3 +34,4 @@ export const ACTORS = 'ACTORS';
 // MESSAGES
 export const ERROR_MESSAGE = 'ERROR_MESSAGE';
 export const START_MESSAGE = 'START_MESSAGE';
+export const HELP_MESSAGE = 'HELP_MESSAGE';

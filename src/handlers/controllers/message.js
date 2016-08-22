@@ -1,7 +1,11 @@
 import startTemplate from '../templates/startTemplate'
+import helpTemplate from '../templates/helpTemplate';
 
 const resolve = text => {
   switch (true) {
+    case text === '/help':
+      return helpTemplate;
+
     default:
       return startTemplate;
   }

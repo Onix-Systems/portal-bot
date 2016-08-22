@@ -22,7 +22,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.get('/', (_, res) =>
-  res.redirect('https://telegram.me/testmemroynodebot')
+  res.redirect('https://telegram.me/PortalCinemaBot')
 );
 app.post(`/${__TOKEN__}`, (req, res) => {
   bot.processUpdate(req.body);
