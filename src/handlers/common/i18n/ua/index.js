@@ -53,7 +53,7 @@ export default {
     `Привіт! Це бот для кінотеатру [${COMMON[KEYS.CINEMA_NAME]}](${PORTAL_URL})`,
     '',
     `*${COMMON[KEYS.ADDRESS]}*:`,
-    'г. Кропивницький (Кіровоград)',
+    'м. Кропивницький (Кіровоград)',
     'ул. 50 років Жовтня 1-А',
     '',
     `*${COMMON[KEYS.CONTACTS]}*:`,
