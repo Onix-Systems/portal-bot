@@ -10,6 +10,7 @@ export const ADDRESS = 'ADDRESS';
 export const CONTACTS = 'CONTACTS';
 export const CINEMA_NAME = 'CINEMA_NAME';
 export const COMPANY_NAME = 'COMPANY_NAME';
+export const MENU = 'MENU';
 
 // DAYS
 export const MONDAY = 'MONDAY';

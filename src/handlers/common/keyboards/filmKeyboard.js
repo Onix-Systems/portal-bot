@@ -4,8 +4,7 @@ import {
   SEANCES,
   TRAILER,
   POSTER,
-  FILMS,
-  PREVIEWS
+  MENU
 } from '../i18n/constants';
 import i18n from '../i18n';
 
@@ -23,8 +22,7 @@ export default (film, prev, next, prefix = '') => [
   ].filter(Boolean),
   [
     { text: '<', callback_data: prefix + prev },
-    { text: i18n(FILMS), callback_data: BUTTONS.FILMS },
-    { text: i18n(PREVIEWS), callback_data: BUTTONS.PREVIEWS },
+    { text: i18n(MENU), callback_data: BUTTONS.MENU },
     { text: '>', callback_data: prefix + next },
   ],
 ];

@@ -1,6 +1,7 @@
 import filmTemplate from '../templates/filmTemplate';
 import filmsTemplate from '../templates/filmsTemplate';
 import previewTemplate from '../templates/previewTemplate';
+import startTemplate from '../templates/startTemplate';
 import errorTemplate from '../templates/errorTemplate';
 import { BUTTONS } from '../../constants';
 
@@ -23,6 +24,9 @@ const resolve = data => {
 
     case data === BUTTONS.FILMS:
       return filmsTemplate();
+
+    case data === BUTTONS.MENU:
+      return startTemplate;
 
     default:
       return errorTemplate;
