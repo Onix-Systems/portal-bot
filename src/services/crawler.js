@@ -1,9 +1,8 @@
 import requestPromise from 'request-promise';
-
-const portalUrl = 'http://portalcinema.com.ua/';
+import { PORTAL_URL } from '../constants/index';
 
 const makeRequest = (method = 'get', path = '', options = {}) => (
-  requestPromise[method](`${portalUrl}${path}`, {
+  requestPromise[method](`${PORTAL_URL}${path}`, {
     timeout: 5000,
     ...options
   })
@@ -76,5 +75,5 @@ getFilms();
 export default filmsPromise;
 
 export const getPoster = imageId => (
-  `${portalUrl}uploads/products/main/${imageId}`
+  `${PORTAL_URL}uploads/products/main/${imageId}`
 );

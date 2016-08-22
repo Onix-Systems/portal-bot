@@ -1,4 +1,4 @@
-import { PARSE_MODE } from '../constants';
+import { PARSE_MODE } from '../../../constants';
 import inline_keyboard from '../keyboards/startKeyboard';
 
 export default {

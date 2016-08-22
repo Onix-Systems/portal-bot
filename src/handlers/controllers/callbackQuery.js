@@ -3,7 +3,7 @@ import startTemplate from '../templates/startTemplate';
 import filmsTemplate from '../templates/filmsTemplate';
 import previewTemplate from '../templates/previewTemplate';
 import errorTemplate from '../templates/errorTemplate';
-import { BUTTONS } from '../common/constants';
+import { BUTTONS } from '../../constants';
 
 const resolve = data => {
   console.log(data);

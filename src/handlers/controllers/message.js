@@ -3,7 +3,7 @@ import startTemplate from '../templates/startTemplate'
 const resolve = text => {
   switch (true) {
     default:
-      return startTemplate();
+      return startTemplate;
   }
 };
 

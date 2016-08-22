@@ -1,8 +1,10 @@
-import { BUTTONS } from '../constants';
+import { BUTTONS } from '../../../constants';
+import { FILMS, PREVIEWS } from '../i18n/constants';
+import i18n from '../../common/i18n';
 
 export default [
   [
-    { text: 'Фильмы', callback_data: BUTTONS.FILMS },
-    { text: 'Анонсы', callback_data: BUTTONS.PREVIEWS }
+    { text: i18n(FILMS), callback_data: BUTTONS.FILMS },
+    { text: i18n(PREVIEWS), callback_data: BUTTONS.PREVIEWS }
   ]
 ];

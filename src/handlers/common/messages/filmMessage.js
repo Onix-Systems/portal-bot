@@ -1,5 +1,25 @@
 import { getPoster } from '../../../services/crawler';
-import { DAYS, BUTTONS } from '../constants';
+import { BUTTONS } from '../../../constants';
+import {
+  SHOW_DATES,
+  FORMAT,
+  GENRES,
+  YEAR,
+  COUNTRY,
+  DURATION,
+  PRODUCER,
+  ACTORS,
+  MONDAY,
+  TUESDAY,
+  WEDNESDAY,
+  THURSDAY,
+  FRIDAY,
+  SATURDAY,
+  SUNDAY
+} from '../i18n/constants';
+import i18n from '../i18n';
+
+const DAYS = [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY];
 
 // TODO: refactor http://goo.gl/WRAomg
 const getSchedule = schedule => Object.keys(schedule)
@@ -9,17 +29,15 @@ const getSchedule = schedule => Object.keys(schedule)
       result[price].push(time);
       return result;
     }, {})
-  ).map((seance, day) => Object.keys(seance)
-    .map(price => [
-        `*${DAYS[day]}*`,
-        `${
-          seance[price]
-            .map(time => `\`${time}\``)
-            .join(', ')
-          } - ${price.replace('.', '')}`,
-        ''
-      ].join("\n")
-    ).join("\n")
+  ).map((seance, day) => `*${i18n(DAYS[day])}*\n${
+    Object.keys(seance)
+      .map(price => `${
+        seance[price]
+          .map(time => `\`${time}\``)
+          .join(', ')
+        } - ${price.replace('.', '')}`
+      ).join("\n")
+    }`
   ).join("\n");
 
 export default (film, prefix) => {
@@ -51,14 +69,14 @@ export default (film, prefix) => {
       return [
         `*${film.result.info.title}*`,
         '',
-        `*Даты показа*: ${film.date_anonce.join('')} - ${film.date_close.join('')}`,
-        `*Формат*: ${film.result.format}`,
-        `*Жанры*: ${film.result.zhanr.join(' ')}`,
-        `*Год*: ${film.result.god}`,
-        `*Страна*: ${film.result.strana}`,
-        `*Длительность*: ${film.result.dlitelnost_min}`,
-        `*Режиссер*: ${film.result.rezhisser}`,
-        `*Актеры*: ${film.result.aktery}`
+        `*${i18n(SHOW_DATES)}*: ${film.date_anonce.join('')} - ${film.date_close.join('')}`,
+        `*${i18n(FORMAT)}*: ${film.result.format}`,
+        `*${i18n(GENRES)}*: ${film.result.zhanr.join(' ')}`,
+        `*${i18n(YEAR)}*: ${film.result.god}`,
+        `*${i18n(COUNTRY)}*: ${film.result.strana}`,
+        `*${i18n(DURATION)}*: ${film.result.dlitelnost_min}`,
+        `*${i18n(PRODUCER)}*: ${film.result.rezhisser}`,
+        `*${i18n(ACTORS)}*: ${film.result.aktery}`
       ].join("\n");
   }
 };

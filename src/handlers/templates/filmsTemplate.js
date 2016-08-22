@@ -1,7 +1,9 @@
 import filmsPromise from '../../services/crawler';
 import options from '../common/options/filmsOptions';
 import text from '../common/messages/filmsMessage';
-import { BUTTONS } from '../common/constants';
+import { BUTTONS } from '../../constants';
+import { PREVIEWS } from '../common/i18n/constants';
+import i18n from '../common/i18n';
 
 export default () => filmsPromise
   .then(films => {
@@ -10,7 +12,7 @@ export default () => filmsPromise
       text: text(films),
       options: options(
         films,
-        { text: 'Анонсы', callback_data: BUTTONS.PREVIEWS }
+        { text: i18n(PREVIEWS), callback_data: BUTTONS.PREVIEWS }
       )
     };
   });

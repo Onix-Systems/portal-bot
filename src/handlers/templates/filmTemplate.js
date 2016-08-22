@@ -4,14 +4,13 @@ import text from '../common/messages/filmMessage';
 
 // TODO: refactor
 const getNeighbour = (films, film, left = true) => {
-  films = films.filter(
-    _film => !!_film.seance.length === !!film.seance.length
+  films = films.filter(_film =>
+    !!_film.seance.length === !!film.seance.length
   );
 
-  const index = films
-    .findIndex(
-      _film => _film.result.info.id === film.result.info.id
-    );
+  const index = films.findIndex(_film =>
+    _film.result.info.id === film.result.info.id
+  );
   const size = films.length;
 
   return films[
@@ -23,7 +22,7 @@ const getNeighbour = (films, film, left = true) => {
 
 export default (filmId, prefix) => filmsPromise
   .then(films => {
-    const film = films.find(film => film.result.info.id === filmId) || films.slice(0, 1);
+    const film = films.find(film => film.result.info.id === filmId);
     return {
       text: text(film, prefix),
       options: options(

@@ -1,21 +1,30 @@
-import { BUTTONS } from '../constants/index';
+import { BUTTONS } from '../../../constants/index';
+import {
+  INFORMATION,
+  SEANCES,
+  TRAILER,
+  POSTER,
+  FILMS,
+  PREVIEWS
+} from '../i18n/constants';
+import i18n from '../i18n';
 
 export default (film, prev, next, prefix = '') => [
   [
     prefix !== '' &&
-    { text: 'Информация', callback_data: film.result.id },
+    { text: i18n(INFORMATION), callback_data: film.result.id },
     film.seance.length && prefix !== BUTTONS.SEANCES &&
-    { text: 'Сеансы', callback_data: BUTTONS.SEANCES + film.result.id },
+    { text: i18n(SEANCES), callback_data: BUTTONS.SEANCES + film.result.id },
     prefix !== BUTTONS.TRAILER &&
-    { text: 'Трейлер', callback_data: BUTTONS.TRAILER + film.result.id },
+    { text: i18n(TRAILER), callback_data: BUTTONS.TRAILER + film.result.id },
     prefix !== BUTTONS.POSTER &&
-    { text: 'Постер', callback_data: BUTTONS.POSTER + film.result.id }
+    { text: i18n(POSTER), callback_data: BUTTONS.POSTER + film.result.id }
 
   ].filter(Boolean),
   [
     { text: '<', callback_data: prefix + prev },
-    { text: 'Фильмы', callback_data: BUTTONS.FILMS },
-    { text: 'Анонсы', callback_data: BUTTONS.PREVIEWS },
+    { text: i18n(FILMS), callback_data: BUTTONS.FILMS },
+    { text: i18n(PREVIEWS), callback_data: BUTTONS.PREVIEWS },
     { text: '>', callback_data: prefix + next },
   ],
 ];

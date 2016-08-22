@@ -1,4 +1,4 @@
-import { PARSE_MODE } from '../constants';
+import { PARSE_MODE } from '../../../constants';
 import filmsKeyboard from '../keyboards/filmsKeyboard';
 
 export default (...args) => ({
