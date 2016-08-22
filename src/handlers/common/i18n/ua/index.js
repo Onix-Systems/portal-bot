@@ -54,7 +54,7 @@ export default {
     '',
     `*${COMMON[KEYS.ADDRESS]}*:`,
     'м. Кропивницький (Кіровоград)',
-    'ул. 50 років Жовтня 1-А',
+    'вул. 50 років Жовтня 1-А',
     '',
     `*${COMMON[KEYS.CONTACTS]}*:`,
     PORTAL_PHONE1,
