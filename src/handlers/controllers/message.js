@@ -25,5 +25,8 @@ const sendMessage = (bot, message) => ({
 
 export default bot => message =>
   resolve(message.text)
-    .catch(() => errorTemplate)
+    .catch(error => {
+      console.error(error);
+      return errorTemplate;
+    })
     .then(sendMessage(bot, message));

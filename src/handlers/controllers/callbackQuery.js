@@ -43,5 +43,8 @@ const editMessageText = (bot, query) => ({
 
 export default bot => query =>
   resolve(query.data)
-    .catch(() => errorTemplate)
+    .catch(error => {
+      console.error(error);
+      return errorTemplate;
+    })
     .then(editMessageText(bot, query));
