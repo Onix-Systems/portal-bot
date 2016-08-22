@@ -1,5 +1,4 @@
 import filmTemplate from '../templates/filmTemplate';
-import startTemplate from '../templates/startTemplate';
 import filmsTemplate from '../templates/filmsTemplate';
 import previewTemplate from '../templates/previewTemplate';
 import errorTemplate from '../templates/errorTemplate';
@@ -25,11 +24,8 @@ const resolve = data => {
     case data === BUTTONS.FILMS:
       return filmsTemplate();
 
-    case data === BUTTONS.MENU:
-      return startTemplate();
-
     default:
-      return errorTemplate();
+      return errorTemplate;
   }
 };
 
