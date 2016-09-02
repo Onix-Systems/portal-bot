@@ -1,5 +1,6 @@
 import env from 'node-env-file';
 import express from 'express';
+import botanio from 'botanio';
 import bodyParser from 'body-parser';
 import TelegramBot from 'node-telegram-bot-api';
 import setHandlers from './handlers';
@@ -7,6 +8,7 @@ import setHandlers from './handlers';
 env('./.env', { raise: false });
 const __PROD__ = process.env.NODE_ENV === 'production';
 const __TOKEN__ = process.env.TELEGRAM_BOT_TOKEN;
+const __BOTANIO_TOKEN__ = process.env.BOTANIO_TOKEN;
 
 const bot = new TelegramBot(
   process.env.TELEGRAM_BOT_TOKEN,
@@ -19,13 +21,18 @@ bot.setWebHook(
 );
 
 const app = express();
+const botan = botanio(__BOTANIO_TOKEN__);
 
 app.use(bodyParser.json());
 app.get('/', (_, res) =>
   res.redirect('https://telegram.me/PortalCinemaBot')
 );
 app.post(`/${__TOKEN__}`, (req, res) => {
-  bot.processUpdate(req.body);
+  const body = req.body;
+
+  botan.track(body);
+  bot.processUpdate(body);
+
   res.sendStatus(200);
 });
 
