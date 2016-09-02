@@ -21,18 +21,13 @@ bot.setWebHook(
 );
 
 const app = express();
-const botan = botanio(__BOTANIO_TOKEN__);
 
 app.use(bodyParser.json());
 app.get('/', (_, res) =>
   res.redirect('https://telegram.me/PortalCinemaBot')
 );
 app.post(`/${__TOKEN__}`, (req, res) => {
-  const body = req.body;
-
-  botan.track(body);
-  bot.processUpdate(body);
-
+  bot.processUpdate(req.body);
   res.sendStatus(200);
 });
 
@@ -40,4 +35,4 @@ __PROD__ && app.listen(process.env.PORT || 8080, () =>
   console.log('express started')
 );
 
-setHandlers(bot);
+setHandlers(bot, __PROD__ && botanio(__BOTANIO_TOKEN__));

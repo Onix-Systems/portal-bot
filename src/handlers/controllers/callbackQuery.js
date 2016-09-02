@@ -5,8 +5,11 @@ import startTemplate from '../templates/startTemplate';
 import errorTemplate from '../templates/errorTemplate';
 import { BUTTONS } from '../../constants';
 
-const resolve = data => {
-  console.log(data);
+const resolve = (query, botan) => {
+  const { data } = query;
+  const { message } = query;
+
+  botan && botan.track(message);
 
   const request = data.match(/(.*?)(\d+)/);
   const prefix = request && request[1];
@@ -44,8 +47,8 @@ const editMessageText = (bot, query) => ({
   }).catch(error => console.error(error)) // ¯\_(ツ)_/¯ "message is not modified" error
 );
 
-export default bot => query =>
-  resolve(query.data)
+export default (bot, botan) => query =>
+  resolve(query, botan)
     .catch(error => {
       console.error(error);
       return errorTemplate;

@@ -2,7 +2,11 @@ import startTemplate from '../templates/startTemplate'
 import helpTemplate from '../templates/helpTemplate';
 import errorTemplate from '../templates/errorTemplate';
 
-const resolve = text => {
+const resolve = (message, botan) => {
+  const { text } = message;
+
+  botan && botan.track(message);
+
   switch (true) {
     case text === '/help':
       return helpTemplate;
@@ -23,8 +27,8 @@ const sendMessage = (bot, message) => ({
   ).catch(error => console.error(error))
 );
 
-export default bot => message =>
-  resolve(message.text)
+export default (bot, botan) => message =>
+  resolve(message, botan)
     .catch(error => {
       console.error(error);
       return errorTemplate;
