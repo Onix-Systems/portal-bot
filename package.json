@@ -13,7 +13,7 @@
     "botanio": "0.0.6",
     "express": "^4.14.0",
     "node-env-file": "^0.1.8",
-    "node-telegram-bot-api": "^0.25.0",
+    "node-telegram-bot-api": "^0.26.0",
     "nodemon": "^1.10.0",
     "request": "^2.74.0",
     "request-promise": "^4.1.1"
