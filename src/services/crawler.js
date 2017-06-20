@@ -3,7 +3,7 @@ import { PORTAL_URL } from '../constants/index';
 
 const makeRequest = (method = 'get', path = '', options = {}) => (
   requestPromise[method](`${PORTAL_URL}${path}`, {
-    timeout: 1e4,
+    timeout: 2e4,
     ...options
   })
 );
