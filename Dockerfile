@@ -5,7 +5,7 @@ MAINTAINER devops@onix-systems.com
 ARG BOTANIO_TOKEN=token
 ARG NODE_ENV=staging
 ARG TELEGRAM_BOT_TOKEN=token
-ARG HOST=localhost
+ARG HOST=http://localhost/
 
 ENV BOTANIO_TOKEN=${BOTANIO_TOKEN} \
     NODE_ENV=${NODE_ENV} \
