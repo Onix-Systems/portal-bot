@@ -9,6 +9,9 @@ env('./.env', { raise: false });
 const __PROD__ = process.env.NODE_ENV === 'production';
 const __TOKEN__ = process.env.TELEGRAM_BOT_TOKEN;
 const __BOTANIO_TOKEN__ = process.env.BOTANIO_TOKEN;
+const __HOST__ = process.env.HOST;
+
+console.log(process.env);
 
 const bot = new TelegramBot(
   process.env.TELEGRAM_BOT_TOKEN,
@@ -16,7 +19,7 @@ const bot = new TelegramBot(
 );
 bot.setWebHook(
   __PROD__ ?
-    `https://portal-cinema-bot.herokuapp.com/${__TOKEN__}` :
+    `${__HOST__}${__TOKEN__}` :
     ''
 );
 
