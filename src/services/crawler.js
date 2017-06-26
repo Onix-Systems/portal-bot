@@ -72,7 +72,7 @@ const getFilms = () => (
 );
 getFilms();
 
-export default filmsPromise;
+export default () => filmsPromise;
 
 export const getPoster = imageId => (
   `${PORTAL_URL}uploads/products/main/${imageId}`

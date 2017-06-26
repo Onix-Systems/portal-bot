@@ -20,7 +20,7 @@ const getNeighbour = (films, film, left = true) => {
     ].result.id;
 };
 
-export default (filmId, prefix) => filmsPromise
+export default (filmId, prefix) => filmsPromise()
   .then(films => {
     const film = films.find(film => film.result.info.id === filmId);
     return {
