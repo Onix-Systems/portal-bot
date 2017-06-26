@@ -9,7 +9,7 @@ const makeRequest = (method = 'get', path = '', options = {}) => (
 );
 
 const fetchFilms = () => {
-  console.log('fetch', Date.now());
+  console.log('fetch', String(new Date));
   return makeRequest()
     .then(getFilmsId)
     .then(getFilmsInfo)
